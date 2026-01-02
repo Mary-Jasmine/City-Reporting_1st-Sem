@@ -1,0 +1,70 @@
+# Query: section-card
+# ContextLines: 1
+
+15 results - 5 files
+
+Municipal_report • hotlines.php:
+  39          <div class="contacts-section">
+  40:             <div class="section-card">
+  41                  <h2>Emergency Contact List</h2>
+
+Municipal_report • style.css:
+   757  /* Section Cards (unchanged) */
+   758: .section-card {
+   759      background: white;
+   
+
+   767  }
+   768: .history-section .section-card{
+   769      width: 60%;
+
+   782  
+   783: .ssection-card h2 {
+   784      background: white;
+
+   793  
+   794: .section-card h2 {
+   795      color: #333;
+
+  1693      
+  1694:     .section-card {
+  1695          padding: 0px;
+
+Municipal_report • submit-report.php:
+   88              <div class="report-section">
+   89:                 <div class="section-card" style="width:65%; margin-left:20%;">
+   90                      <h2>Submit New Incident Report</h2>
+
+  184              <div class="history-section">
+  185:                 <div class="section-card">
+  186                      <h2>My Incident Report History</h2>
+
+Municipal_report • Municipal-Report\style.css:
+   507  /* Section Cards */
+   508: .section-card {
+   509      background: white;
+
+   515  
+   516: .section-card h2 {
+   517      color: #333;
+
+  1090      
+  1091:     .section-card {
+  1092          padding: 20px;
+
+D:\Municipal_report\style.css:
+   756  /* Section Cards (unchanged) */
+   757: .section-card {
+   758      background: white;
+
+   779  
+   780: .ssection-card h2 {
+   781      background: white;
+
+   790  
+   791: .section-card h2 {
+   792      color: #333;
+
+  1733      
+  1734:     .section-card {
+  1735          padding: 0px;
