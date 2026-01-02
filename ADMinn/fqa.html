@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin FAQ - Municipality Incident Reporting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #9c2a12;
+            --primary-light: #c85a5a;
+            --primary-dark: #7a1c0a;
+            --secondary-color: #9c2a12;
+            --accent-color: #ff6b35;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --light-bg: #f8f9fa;
+            --dark-text: #333333;
+            --light-text: #666666;
+            --white: #ffffff;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --gradient: linear-gradient(135deg, #9c2a12 0%, #c64242 100%);
+            --card-gradient: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            --admin-gradient: linear-gradient(135deg, #9c2a12 0%, #c64242 100%);
+            --admin-light: rgba(156, 42, 18, 0.1);
+            --admin-dark: #7a1c0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark-text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .topbar {
+            background: var(--admin-gradient);
+            color: var(--white);
+            padding: 20px 30px;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(156, 42, 18, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .admin-badge {
+            background: linear-gradient(135deg, #c64242 0%, #9c2a12 100%);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: auto;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--admin-gradient);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(156, 42, 18, 0.2);
+            margin: 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 42, 18, 0.3);
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 20px;
+        }
+
+        .hero-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--primary-light);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--light-text);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+
+        .search-section {
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 16px;
+            border: 2px solid var(--admin-light);
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(156, 42, 18, 0.1);
+        }
+
+        .search-box:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 20px rgba(156, 42, 18, 0.15);
+        }
+
+        .search-box::placeholder {
+            color: #aaa;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 12px 25px;
+            background: var(--white);
+            border: 2px solid var(--admin-light);
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--dark-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-light);
+            box-shadow: 0 5px 15px rgba(156, 42, 18, 0.1);
+        }
+
+        .category-btn.active {
+            background: var(--admin-gradient);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 60px auto;
+        }
+
+        .faq-category {
+            margin-bottom: 60px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--admin-light);
+        }
+
+        .category-icon {
+            font-size: 32px;
+            color: var(--primary-color);
+            background: var(--admin-light);
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .category-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--admin-light);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(156, 42, 18, 0.1);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(156, 42, 18, 0.02);
+        }
+
+        .question-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            color: var(--dark-text);
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .question-number {
+            font-size: 16px;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-right: 20px;
+            background: var(--admin-light);
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .toggle-icon {
+            color: var(--primary-color);
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 30px 25px 30px;
+            max-height: 1000px;
+            border-top-color: var(--admin-light);
+        }
+
+        .answer-content {
+            color: var(--light-text);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .answer-content ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .answer-content li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .answer-content li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .warning-note {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid var(--warning-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .warning-note:before {
+            content: '⚠️';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 20px;
+        }
+
+        .info-note {
+            background: linear-gradient(135deg, #f0f5ff, #e6ecfa);
+            border: 1px solid var(--info-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .info-note:before {
+            content: 'ℹ️';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 20px;
+        }
+
+        .step-guide {
+            background: linear-gradient(135deg, #f9f2f0, #f5e8e5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .contact-section {
+            background: var(--admin-gradient);
+            color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-icon {
+            font-size: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            color: var(--light-text);
+            font-size: 14px;
+            border-top: 1px solid var(--admin-light);
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+                margin: 30px auto;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .category-tabs {
+                gap: 10px;
+            }
+            
+            .category-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .faq-question {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 16px;
+            }
+            
+            .contact-info {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .topbar {
+                padding: 15px 20px;
+                font-size: 18px;
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .topbar .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .admin-badge {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .category-title {
+                font-size: 24px;
+            }
+            
+            .faq-question {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .question-number {
+                align-self: flex-start;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: var(--light-text);
+            font-size: 18px;
+            display: none;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="logo-container">
+            <div class="logo-circle">
+                <img src="ccircle.png" alt="Municipality Logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiByeD0iMzAiIGZpbGw9IiNGRkZGRkUiLz4KPHBhdGggZD0iTTMwIDEwQzE5IDExLjUgMTEgMTkgMTAgMzBDMTAuNSAzMCAxMS41IDMwIDEyIDMwQzEyIDIxIDIxIDEyIDMwIDEyQzM5IDEyIDQ4IDIxIDQ4IDMwQzQ4LjUgMzAgNDkuNSAzMCA1MCAzMEM0OSAxOSA0MSAxMS41IDMwIDEwWiIgZmlsbD0iIzlDMkExMiIvPgo8cGF0aCBkPSJNMzAgNTAuNUMzMC41IDUxIDMxIDUxIDMyIDUxQzMzIDUxIDM0IDUwLjUgMzQgNTBDMzQgNDYgMzggNDIgNDIgNDJINDNDNDQgNDIgNDQgNDIgNDUgNDJDNTEgNDIgNTYgMzggNTYgMzBDNTYgMjIuNSA1MS41IDE4IDQ2LjUgMThDMzUuNSAxOCAzMCAyOCAzMCAyOEMzMCAyOCAyNC41IDE4IDEzLjUgMThDOC41IDE4IDQgMjIuNSA0IDMwQzQgMzggOSA0MiAxNSA0MkMxNiA0MiAxNiA0MiAxNyA0MkgyMUMzNSA0MiAzNCA0NiAzNCA1MEMzNCA1MC41IDM1IDUxIDM2IDUxQzM3IDUxIDM3LjUgNTEgMzggNTBDMzguNSA0OSAzOS41IDQ5IDQxIDQ5SDQzQzQ0LjUgNDkgNDUuNSA0OSA0NiA1MEM0Ni41IDUxIDQ3IDUxIDQ4IDUxQzQ5IDUxIDQ5LjUgNTEgNTAgNTBDNTAuNSA0OSA1MSA0OCA1MiA0OEg1NEM1NS41IDQ4IDU2LjUgNDggNTcgNDlDNTcuNSA1MCA1OCA1MCA1OSA1MEM1OSA1MCA2MCA1MCA2MCA1MEM0OS41IDUwLjUgNDAuNSA1MCAzMCA1MC41WiIgZmlsbD0iI0M4NDJGMCIvPgo8L3N2Zz4='">
+            </div>
+            <span>Municipality Incident Reporting</span>
+        </div>
+        <span class="admin-badge">Administrator</span>
+    </div>
+
+    <a href="admin_analytics.php" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Admin Dashboard
+    </a>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="hero-title">Frequently Asked Questions</h1>
+            <p class="hero-subtitle">
+                Find quick answers to common questions about the Municipality Incident Reporting System administration.
+                Search or browse by category to get the information you need.
+            </p>
+        </div>
+
+        <div class="search-section">
+            <input type="text" class="search-box" placeholder="Search for questions or keywords..." id="searchInput">
+        </div>
+
+        <div class="category-tabs">
+            <button class="category-btn active" data-category="all">
+                <i class="fas fa-th"></i> All Questions
+            </button>
+            <button class="category-btn" data-category="user-management">
+                <i class="fas fa-users-cog"></i> User Management
+            </button>
+            <button class="category-btn" data-category="incidents">
+                <i class="fas fa-exclamation-triangle"></i> Incidents
+            </button>
+            <button class="category-btn" data-category="analytics">
+                <i class="fas fa-chart-bar"></i> Analytics & Reports
+            </button>
+            <button class="category-btn" data-category="system">
+                <i class="fas fa-cogs"></i> System Configuration
+            </button>
+            <button class="category-btn" data-category="security">
+                <i class="fas fa-shield-alt"></i> Security
+            </button>
+        </div>
+
+        <div class="faq-container">
+            <!-- User Management Category -->
+            <div class="faq-category" id="user-management">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h2 class="category-title">User Management</h2>
+                </div>
+
+                <div class="faq-item" data-category="user-management">
+                    <div class="faq-question">
+                        <span class="question-number">1</span>
+                        <span class="question-text">How do I create a new user account for barangay officials?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>To create a new user account:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Navigate to the <strong>Users</strong> section from the admin dashboard</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Click the <strong>"Add New User"</strong> button</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Fill in the required information:
+                                        <ul>
+                                            <li>Full Name</li>
+                                            <li>Email Address</li>
+                                            <li>Contact Number</li>
+                                            <li>Barangay Assignment</li>
+                                            <li>User Role (Barangay Official, Viewer, etc.)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Click <strong>"Create Account"</strong></div>
+                                </div>
+                            </div>
+                            <div class="info-note">
+                                The system will automatically generate a temporary password that will be sent to the user's email.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="user-management">
+                    <div class="faq-question">
+                        <span class="question-number">2</span>
+                        <span class="question-text">How do I reset a user's password?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>To reset a user's password:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Go to <strong>Users</strong> section and find the user in the list</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Click the <strong>"Actions"</strong> button next to the user</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Select <strong>"Reset Password"</strong> from the dropdown menu</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Confirm the action when prompted</div>
+                                </div>
+                            </div>
+                            <div class="warning-note">
+                                The user will receive an email with a password reset link. This action invalidates their current password immediately.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="user-management">
+                    <div class="faq-question">
+                        <span class="question-number">3</span>
+                        <span class="question-text">What user roles are available and what permissions do they have?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>The system supports four user roles with different permission levels:</p>
+                            
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <strong>Super Administrator</strong>
+                                        <ul>
+                                            <li>Full system access</li>
+                                            <li>Can manage all users</li>
+                                            <li>System configuration rights</li>
+                                            <li>Access to all reports and analytics</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <strong>Municipal Administrator</strong>
+                                        <ul>
+                                            <li>Manage barangay users</li>
+                                            <li>Review and verify incidents</li>
+                                            <li>Generate municipal reports</li>
+                                            <li>Create announcements</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <strong>Barangay Official</strong>
+                                        <ul>
+                                            <li>Submit incident reports</li>
+                                            <li>View barangay-specific data</li>
+                                            <li>Update incident status</li>
+                                            <li>Access hotlines and resources</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <strong>Viewer</strong>
+                                        <ul>
+                                            <li>Read-only access</li>
+                                            <li>View public announcements</li>
+                                            <li>Access emergency resources</li>
+                                            <li>No submission or editing rights</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incidents Category -->
+            <div class="faq-category" id="incidents">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2 class="category-title">Incident Management</h2>
+                </div>
+
+                <div class="faq-item" data-category="incidents">
+                    <div class="faq-question">
+                        <span class="question-number">4</span>
+                        <span class="question-text">How do I verify and approve reported incidents?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Incident verification process:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Go to <strong>Incidents</strong> section</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Click on a pending incident to view details</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Review the reported information and attached files</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Use the status dropdown to:
+                                        <ul>
+                                            <li><strong>Approve</strong> - Incident is valid and verified</li>
+                                            <li><strong>Require More Info</strong> - Request additional details</li>
+                                            <li><strong>Reject</strong> - Incident is invalid or duplicate</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">Add verification notes if necessary</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">6</div>
+                                    <div class="step-content">Click <strong>"Update Status"</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="incidents">
+                    <div class="faq-question">
+                        <span class="question-number">5</span>
+                        <span class="question-text">What should I do with duplicate incident reports?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>When encountering duplicate reports:</p>
+                            <ol>
+                                <li><strong>Identify duplicates:</strong> Check for similar incidents reported within the same timeframe and location</li>
+                                <li><strong>Merge information:</strong> Consolidate all relevant details from duplicate reports into the primary incident</li>
+                                <li><strong>Update status:</strong> Mark duplicates as "Merged" with reference to the primary incident ID</li>
+                                <li><strong>Notify reporters:</strong> Optionally send a notification to inform about the merge</li>
+                                <li><strong>Document:</strong> Add a note explaining the merge for audit purposes</li>
+                            </ol>
+                            <div class="info-note">
+                                The system automatically suggests potential duplicates based on location proximity and time similarity.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="incidents">
+                    <div class="faq-question">
+                        <span class="question-number">6</span>
+                        <span class="question-text">How do I escalate an incident to higher authorities?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>To escalate an incident:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Open the incident details</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Click the <strong>"Escalate"</strong> button</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Select the escalation level:
+                                        <ul>
+                                            <li><strong>Municipal Level</strong> - For barangay-wide issues</li>
+                                            <li><strong>Provincial Level</strong> - For multi-municipality issues</li>
+                                            <li><strong>Regional Level</strong> - For major emergencies</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Add escalation notes and required actions</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">Click <strong>"Confirm Escalation"</strong></div>
+                                </div>
+                            </div>
+                            <div class="warning-note">
+                                Escalated incidents trigger automatic notifications to the relevant authorities and require immediate attention.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Category -->
+            <div class="faq-category" id="analytics">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h2 class="category-title">Analytics & Reports</h2>
+                </div>
+
+                <div class="faq-item" data-category="analytics">
+                    <div class="faq-question">
+                        <span class="question-number">7</span>
+                        <span class="question-text">How do I generate monthly incident reports?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Monthly report generation:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Navigate to <strong>Analytics</strong> dashboard</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Click on <strong>"Generate Report"</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Select report parameters:
+                                        <ul>
+                                            <li>Report Type: Monthly Summary</li>
+                                            <li>Month and Year</li>
+                                            <li>Barangay(s) to include</li>
+                                            <li>Incident types to analyze</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Choose output format:
+                                        <ul>
+                                            <li>PDF Document</li>
+                                            <li>Excel Spreadsheet</li>
+                                            <li>Printable HTML</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">Click <strong>"Generate"</strong></div>
+                                </div>
+                            </div>
+                            <div class="info-note">
+                                Reports are automatically saved to the system archive and can be accessed anytime from the Reports section.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="analytics">
+                    <div class="faq-question">
+                        <span class="question-number">8</span>
+                        <span class="question-text">How can I identify high-risk areas using the heatmap?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Using the heatmap to identify risk areas:</p>
+                            <ol>
+                                <li><strong>Access Heatmap:</strong> Go to the Heatmap section from admin dashboard</li>
+                                <li><strong>Apply Filters:</strong> Filter by date range and incident type</li>
+                                <li><strong>Interpret Colors:</strong>
+                                    <ul>
+                                        <li><strong style="color: #ff4444;">Red Areas:</strong> High incident density - Immediate attention needed</li>
+                                        <li><strong style="color: #ffbb33;">Yellow Areas:</strong> Medium incident density - Monitor closely</li>
+                                        <li><strong style="color: #00C851;">Green Areas:</strong> Low incident density - Standard monitoring</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Analyze Patterns:</strong> Look for clusters and trends over time</li>
+                                <li><strong>Generate Insights:</strong> Click on areas to view detailed statistics</li>
+                            </ol>
+                            <div class="info-note">
+                                The heatmap updates in real-time as new incidents are reported and verified.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Configuration Category -->
+            <div class="faq-category" id="system">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h2 class="category-title">System Configuration</h2>
+                </div>
+
+                <div class="faq-item" data-category="system">
+                    <div class="faq-question">
+                        <span class="question-number">9</span>
+                        <span class="question-text">How do I update emergency hotline numbers?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Updating hotline information:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Go to <strong>Hotlines</strong> section</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Click on the agency you want to edit</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Update the contact information:
+                                        <ul>
+                                            <li>Phone Numbers (Mobile/Landline)</li>
+                                            <li>Agency Name</li>
+                                            <li>Emergency Type</li>
+                                            <li>Operating Hours</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Click <strong>"Save Changes"</strong></div>
+                                </div>
+                            </div>
+                            <div class="warning-note">
+                                Changes to hotline numbers are immediately reflected in the user interface. Consider sending a system announcement about important changes.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="system">
+                    <div class="faq-question">
+                        <span class="question-number">10</span>
+                        <span class="question-text">How do I schedule system maintenance?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>To schedule system maintenance:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Navigate to <strong>System Settings</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Select <strong>"Maintenance Schedule"</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Click <strong>"Schedule Maintenance"</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Configure maintenance details:
+                                        <ul>
+                                            <li>Start Date and Time</li>
+                                            <li>Expected Duration</li>
+                                            <li>Maintenance Type (Database, Updates, etc.)</li>
+                                            <li>Affected Services</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">Create an automatic announcement to notify users</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">6</div>
+                                    <div class="step-content">Click <strong>"Schedule"</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Category -->
+            <div class="faq-category" id="security">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2 class="category-title">Security & Access Control</h2>
+                </div>
+
+                <div class="faq-item" data-category="security">
+                    <div class="faq-question">
+                        <span class="question-number">11</span>
+                        <span class="question-text">How do I enable two-factor authentication for admin accounts?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Enabling 2FA for administrators:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Go to <strong>Security Settings</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Select <strong>"Two-Factor Authentication"</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Choose 2FA method:
+                                        <ul>
+                                            <li><strong>Email Verification</strong> - Code sent to registered email</li>
+                                            <li><strong>SMS Verification</strong> - Code sent to mobile number</li>
+                                            <li><strong>Authenticator App</strong> - Use Google Authenticator or similar</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Configure settings for admin accounts</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">Click <strong>"Enable 2FA"</strong></div>
+                                </div>
+                            </div>
+                            <div class="info-note">
+                                Two-factor authentication significantly enhances account security. All admin accounts will be required to set up 2FA on next login.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="security">
+                    <div class="faq-question">
+                        <span class="question-number">12</span>
+                        <span class="question-text">How do I review system logs for suspicious activities?</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Monitoring system logs:</p>
+                            <div class="step-guide">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">Navigate to <strong>Security Settings</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">Select <strong>"System Logs"</strong></div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">Apply filters to review specific activities:
+                                        <ul>
+                                            <li>Date Range</li>
+                                            <li>User ID or Name</li>
+                                            <li>Action Type (Login, Report, Update, etc.)</li>
+                                            <li>IP Address</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">Look for suspicious patterns:
+                                        <ul>
+                                            <li>Multiple failed login attempts</li>
+                                            <li>Unusual access times</li>
+                                            <li>Unauthorized access attempts</li>
+                                            <li>Multiple account lockouts</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">Export logs for further analysis if needed</div>
+                                </div>
+                            </div>
+                            <div class="warning-note">
+                                Regular log review is essential for maintaining system security. Consider scheduling weekly security audits.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="no-results" id="noResults">
+            <i class="fas fa-search fa-3x" style="margin-bottom: 20px;"></i>
+            <h3>No matching questions found</h3>
+            <p>Try different keywords or browse the categories above</p>
+        </div>
+
+        <div class="contact-section">
+            <h2 class="contact-title">Need More Help?</h2>
+            <p>If you couldn't find the answer to your question, please contact our technical support team.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4>Email Support</h4>
+                    <p>mirssynergy@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h4>Phone Support</h4>
+                    <p>095601234567</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Support Hours</h4>
+                    <p>Mon-Sun: 24 Hours</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle Functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Category Filter Functionality
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const faqCategories = document.querySelectorAll('.faq-category');
+            const allFaqItems = document.querySelectorAll('.faq-item');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const category = btn.dataset.category;
+                    
+                    // Show all items initially
+                    allFaqItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    
+                    // Show all categories initially
+                    faqCategories.forEach(cat => {
+                        cat.style.display = 'block';
+                    });
+                    
+                    // Filter if not "all"
+                    if (category !== 'all') {
+                        allFaqItems.forEach(item => {
+                            if (item.dataset.category !== category) {
+                                item.style.display = 'none';
+                            } else {
+                                item.style.display = 'block';
+                            }
+                        });
+                        
+                        // Hide empty categories
+                        faqCategories.forEach(cat => {
+                            const itemsInCategory = cat.querySelectorAll('.faq-item');
+                            const visibleItems = Array.from(itemsInCategory).filter(item => 
+                                item.style.display !== 'none'
+                            );
+                            
+                            if (visibleItems.length === 0) {
+                                cat.style.display = 'none';
+                            }
+                        });
+                    }
+                    
+                    // Reset search
+                    searchInput.value = '';
+                    noResults.style.display = 'none';
+                });
+            });
+
+            // Search Functionality
+            const searchInput = document.getElementById('searchInput');
+            const noResults = document.getElementById('noResults');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let hasResults = false;
+                
+                // Reset category filter
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                document.querySelector('[data-category="all"]').classList.add('active');
+                
+                allFaqItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+                
+                faqCategories.forEach(cat => {
+                    cat.style.display = 'block';
+                });
+                
+                if (searchTerm.length > 0) {
+                    allFaqItems.forEach(item => {
+                        const questionText = item.querySelector('.question-text').textContent.toLowerCase();
+                        const answerText = item.querySelector('.answer-content').textContent.toLowerCase();
+                        
+                        if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                            item.style.display = 'block';
+                            hasResults = true;
+                            
+                            // Highlight search term
+                            const questionElement = item.querySelector('.question-text');
+                            const answerElement = item.querySelector('.answer-content');
+                            
+                            // Remove previous highlights
+                            questionElement.innerHTML = questionElement.textContent;
+                            answerElement.innerHTML = answerElement.textContent;
+                            
+                            // Apply new highlights
+                            if (questionText.includes(searchTerm)) {
+                                const regex = new RegExp(searchTerm, 'gi');
+                                questionElement.innerHTML = questionElement.textContent.replace(regex, 
+                                    match => `<span class="highlight">${match}</span>`
+                                );
+                            }
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Hide empty categories
+                    faqCategories.forEach(cat => {
+                        const itemsInCategory = cat.querySelectorAll('.faq-item');
+                        const visibleItems = Array.from(itemsInCategory).filter(item => 
+                            item.style.display !== 'none'
+                        );
+                        
+                        if (visibleItems.length === 0) {
+                            cat.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show/hide no results message
+                    noResults.style.display = hasResults ? 'none' : 'block';
+                } else {
+                    noResults.style.display = 'none';
+                    
+                    // Remove highlights
+                    allFaqItems.forEach(item => {
+                        const questionElement = item.querySelector('.question-text');
+                        const answerElement = item.querySelector('.answer-content');
+                        
+                        questionElement.innerHTML = questionElement.textContent;
+                        answerElement.innerHTML = answerElement.textContent;
+                    });
+                }
+            });
+
+            // Auto-open FAQ on page load with hash
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetItem = document.getElementById(targetId);
+                if (targetItem) {
+                    targetItem.scrollIntoView({ behavior: 'smooth' });
+                    const parentCategory = targetItem.closest('.faq-category');
+                    if (parentCategory) {
+                        parentCategory.style.display = 'block';
+                        const categoryId = parentCategory.id;
+                        const categoryBtn = document.querySelector(`[data-category="${categoryId}"]`);
+                        if (categoryBtn) {
+                            categoryBtns.forEach(b => b.classList.remove('active'));
+                            categoryBtn.classList.add('active');
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
