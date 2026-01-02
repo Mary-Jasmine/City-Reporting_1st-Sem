@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ - Municipality Incident Reporting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #9c2a12;
+            --primary-light: #c85a5a;
+            --secondary-color: #2a5c9c;
+            --accent-color: #ff6b35;
+            --success-color: #28a745;
+            --light-bg: #f8f9fa;
+            --dark-text: #333333;
+            --light-text: #666666;
+            --white: #ffffff;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --gradient: linear-gradient(135deg, #9c2a12 0%, #c85a5a 100%);
+            --card-gradient: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark-text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .topbar {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 20px 30px;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(156, 42, 18, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar img {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(156, 42, 18, 0.2);
+            margin: 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 42, 18, 0.3);
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 20px;
+        }
+
+        .hero-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--primary-light);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--light-text);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto 40px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 18px 50px 18px 25px;
+            font-size: 16px;
+            border: 2px solid rgba(156, 42, 18, 0.2);
+            border-radius: 50px;
+            background: var(--white);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(156, 42, 18, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .stat-card {
+            background: var(--card-gradient);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(156, 42, 18, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(156, 42, 18, 0.15);
+        }
+
+        .stat-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .stat-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            background: rgba(156, 42, 18, 0.1);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .faq-container {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+            border: 1px solid rgba(156, 42, 18, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .intro-card {
+            background: linear-gradient(135deg, rgba(156, 42, 18, 0.05), rgba(200, 90, 90, 0.05));
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            border: 1px solid rgba(156, 42, 18, 0.1);
+        }
+
+        .intro-card i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .intro-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .intro-card p {
+            color: var(--light-text);
+            font-size: 16px;
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .faq-item {
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--white);
+            border: 2px solid rgba(156, 42, 18, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(156, 42, 18, 0.1);
+        }
+
+        .faq-item.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(156, 42, 18, 0.15);
+        }
+
+        .faq-header {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-header {
+            background: linear-gradient(to right, rgba(156, 42, 18, 0.03), rgba(200, 90, 90, 0.03));
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .question-number {
+            background: var(--gradient);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(156, 42, 18, 0.3);
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--dark-text);
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .toggle-icon {
+            color: var(--primary-color);
+            font-size: 18px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            background: var(--white);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary-light);
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .toggle-icon {
+            transform: rotate(180deg);
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            background: var(--white);
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 1000px;
+        }
+
+        .answer-container {
+            padding: 0 30px 30px 30px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .answer-container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .answer-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .answer-icon {
+            color: var(--secondary-color);
+            font-size: 24px;
+            margin-top: 5px;
+            flex-shrink: 0;
+            background: rgba(42, 92, 156, 0.1);
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .answer-text {
+            font-size: 16px;
+            color: var(--light-text);
+            flex: 1;
+            line-height: 1.8;
+        }
+
+        .answer-text ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .answer-text li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .answer-text li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 6px 15px;
+            background: rgba(156, 42, 18, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 15px;
+            margin-right: 10px;
+        }
+
+        .help-section {
+            background: linear-gradient(135deg, rgba(42, 92, 156, 0.05), rgba(74, 124, 188, 0.05));
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+            border: 1px solid rgba(42, 92, 156, 0.1);
+        }
+
+        .help-icon {
+            font-size: 48px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .help-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .help-section p {
+            color: var(--light-text);
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(42, 92, 156, 0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(42, 92, 156, 0.3);
+            background: #1a4a8a;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 50px;
+            color: var(--light-text);
+            font-size: 14px;
+            border-top: 1px solid rgba(156, 42, 18, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+                margin: 30px auto;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .faq-container {
+                padding: 25px;
+            }
+            
+            .faq-header {
+                padding: 20px;
+            }
+            
+            .header-content {
+                gap: 15px;
+            }
+            
+            .question-text {
+                font-size: 16px;
+            }
+            
+            .answer-wrapper {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .topbar {
+                padding: 15px 20px;
+                font-size: 18px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .faq-header {
+                padding: 18px 15px;
+            }
+            
+            .question-number {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <img src="logo.png" alt="Logo">
+        Municipality Incident Reporting System
+    </div>
+
+    <a href="dashboard.php" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="hero-title">Frequently Asked Questions</h1>
+            <p class="hero-subtitle">
+                Find quick answers to common questions about using the Municipality Incident Reporting System.
+            </p>
+            
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search for questions...">
+                <div class="search-icon"><i class="fas fa-search"></i></div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-question-circle"></i></div>
+                <div class="stat-number">8</div>
+                <div class="stat-label">FAQ Categories</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Secure Data</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-headset"></i></div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Available</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number">80</div>
+                <div class="stat-label">Barangays Covered</div>
+            </div>
+        </div>
+
+        <div class="faq-container">
+            <div class="intro-card">
+                <i class="fas fa-info-circle"></i>
+                <h3>How to Use This FAQ</h3>
+                <p>Click on any question below to reveal its detailed answer. Use the search box above to find specific topics quickly.</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">1</div>
+                            <div class="question-text">What is the Municipality Incident Reporting system?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-building"></i></div>
+                                <div class="answer-text">
+                                    The Municipality Incident Reporting system is an online platform where barangays can submit reports of incidents such as accidents, emergencies, or other safety concerns. Municipal officials can review and track these reports in an organized way.
+                                    <div class="category-tag">General Information</div>
+                                    <div class="category-tag">System Overview</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">2</div>
+                            <div class="question-text">Who can submit a report through this system?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-users"></i></div>
+                                <div class="answer-text">
+                                    Barangay officials or designated users can submit incident reports through the system. Each barangay has authorized personnel who can access and use the reporting features.
+                                    <div class="category-tag">User Access</div>
+                                    <div class="category-tag">Authorization</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">3</div>
+                            <div class="question-text">Who manages and reviews the submitted reports?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-user-shield"></i></div>
+                                <div class="answer-text">
+                                    Municipal officials act as administrators. They can access, review, and track all submitted reports. The system ensures proper oversight and management by authorized personnel only.
+                                    <div class="category-tag">Administration</div>
+                                    <div class="category-tag">Management</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">4</div>
+                            <div class="question-text">Does the system guarantee immediate action by municipal officials?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-clock"></i></div>
+                                <div class="answer-text">
+                                    No. The system is designed for reporting and documentation. It ensures that incidents are officially recorded, but it does not guarantee instant action. Response times depend on municipal protocols and resource availability.
+                                    <div class="category-tag">Response Time</div>
+                                    <div class="category-tag">Documentation</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">5</div>
+                            <div class="question-text">What information can I include when submitting a report?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-file-alt"></i></div>
+                                <div class="answer-text">
+                                    Reports can include comprehensive details to ensure proper documentation:
+                                    <ul>
+                                        <li>Detailed description of the incident</li>
+                                        <li>Exact location with landmarks if possible</li>
+                                        <li>Supporting media such as photos or videos</li>
+                                        <li>Date and time of the incident</li>
+                                        <li>Contact information for follow-up</li>
+                                    </ul>
+                                    <div class="category-tag">Reporting</div>
+                                    <div class="category-tag">Documentation</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">6</div>
+                            <div class="question-text">Can I track the status of my submitted reports?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="answer-text">
+                                    Yes. Barangay users can see the status of their submitted reports to know if municipal officials have reviewed them. The system provides real-time updates on report status, including:
+                                    <ul>
+                                        <li>Submitted - Report received</li>
+                                        <li>Under Review - Being processed</li>
+                                        <li>Action Required - Additional info needed</li>
+                                        <li>Resolved - Incident addressed</li>
+                                    </ul>
+                                    <div class="category-tag">Tracking</div>
+                                    <div class="category-tag">Status Updates</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">7</div>
+                            <div class="question-text">How secure is my data in this system?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-shield-alt"></i></div>
+                                <div class="answer-text">
+                                    Yes. Only authorized municipal officials can access detailed reports. The system ensures that submitted information is safe and confidential through:
+                                    <ul>
+                                        <li>Encrypted data transmission</li>
+                                        <li>Secure user authentication</li>
+                                        <li>Role-based access control</li>
+                                        <li>Regular security audits</li>
+                                    </ul>
+                                    <div class="category-tag">Security</div>
+                                    <div class="category-tag">Privacy</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <div class="header-content">
+                            <div class="question-number">8</div>
+                            <div class="question-text">How can I get support or assistance if I have questions?</div>
+                        </div>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-content">
+                        <div class="answer-container">
+                            <div class="answer-wrapper">
+                                <div class="answer-icon"><i class="fas fa-headset"></i></div>
+                                <div class="answer-text">
+                                    For questions or help, barangay users can:
+                                    <ul>
+                                        <li>Contact the municipal office directly</li>
+                                        <li>Use the system's built-in support channels</li>
+                                        <li>Email the technical support team</li>
+                                        <li>Check the user guide and documentation</li>
+                                    </ul>
+                                    Contact information is available in the system's help section.
+                                    <div class="category-tag">Support</div>
+                                    <div class="category-tag">Help Desk</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const searchBox = document.querySelector('.search-box');
+            
+            faqItems.forEach(item => {
+                const header = item.querySelector('.faq-header');
+                
+                header.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
+                });
+            });
+            
+            searchBox.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.question-text').textContent.toLowerCase();
+                    const answer = item.querySelector('.answer-text').textContent.toLowerCase();
+                    
+                    if (searchTerm === '' || question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = '';
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.faq-item, .stat-card').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'all 0.6s ease';
+                observer.observe(element);
+            });
+            
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Barangay Coordinates Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20n69z5rYyC2gL+3d9wT3lXf2z2i6p3D0e0o/9C4k/+"
+            crossorigin=""></script>
+    <style>
+
+        #map { height: 700px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script>
+        const barangayCoordinates = {
+            'Atisan': [14.0539, 121.3408],
+            'Bagong Bayan II-A': [14.0688, 121.3181],
+            'Bagong Pook VI-C': [14.0842, 121.3077],
+            'Barangay I-A': [14.0681, 121.3251],
+            'Barangay I-B': [14.0675, 121.3273],
+            'Barangay II-A': [14.0689, 121.3295],
+            'Barangay II-B': [14.0705, 121.3299],
+            'Barangay II-C': [14.0715, 121.3313],
+            'Barangay II-D': [14.0723, 121.3328],
+            'Barangay II-E': [14.0734, 121.3346],
+            'Barangay II-F': [14.0719, 121.3357],
+            'Barangay III-A': [14.0695, 121.3234],
+            'Barangay III-B': [14.0711, 121.3231],
+            'Barangay III-C': [14.0728, 121.3229],
+            'Barangay III-D': [14.0742, 121.3232],
+            'Barangay III-E': [14.0739, 121.3214],
+            'Barangay III-F': [14.0716, 121.3208],
+            'Barangay IV-A': [14.0655, 121.3224],
+            'Barangay IV-B': [14.0668, 121.3235],
+            'Barangay IV-C': [14.0683, 121.3239],
+            'Barangay V-A': [14.0672, 121.3180],
+            'Barangay V-B': [14.0689, 121.3182],
+            'Barangay V-C': [14.0698, 121.3186],
+            'Barangay V-D': [14.0711, 121.3188],
+            'Barangay VI-A': [14.0642, 121.3197],
+            'Barangay VI-B': [14.0629, 121.3209],
+            'Barangay VI-D': [14.0603, 121.3216],
+            'Barangay VI-E': [14.0590, 121.3229],
+            'Barangay VII-A': [14.0751, 121.3225],
+            'Barangay VII-B': [14.0759, 121.3241],
+            'Barangay VII-C': [14.0772, 121.3252],
+            'Barangay VII-D': [14.0786, 121.3267],
+            'Barangay VII-E': [14.0789, 121.3249],
+            'Bautista': [14.0465, 121.3194],
+            'Concepcion': [14.0381, 121.3290],
+            'Del Remedio': [14.0720, 121.3115],
+            'Dolores': [14.0558, 121.3241],
+            'San Antonio 1': [14.0504, 121.3306],
+            'San Antonio 2': [14.0501, 121.3339],
+            'San Bartolome': [14.0590, 121.3133],
+            'San Buenaventura': [14.0421, 121.3127],
+            'San Crispin': [14.0424, 121.3294],
+            'San Cristobal': [14.0723, 121.3451],
+            'San Diego': [14.0801, 121.3059],
+            'San Francisco': [14.0531, 121.3402],
+            'San Gabriel': [14.0612, 121.3090],
+            'San Gregorio': [14.0354, 121.3198],
+            'San Ignacio': [14.0483, 121.3157],
+            'San Isidro': [14.0495, 121.3089],
+            'San Joaquin': [14.0407, 121.3363],
+            'San Jose': [14.0546, 121.3101],
+            'San Juan': [14.0441, 121.3263],
+            'San Lorenzo': [14.0402, 121.3157],
+            'San Lucas 1': [14.0823, 121.3472],
+            'San Lucas 2': [14.0853, 121.3504],
+            'San Marcos': [14.0666, 121.3402],
+            'San Mateo': [14.0433, 121.3198],
+            'San Miguel': [14.0617, 121.3341],
+            'San Nicolas': [14.0664, 121.3306],
+            'San Pedro': [14.0362, 121.3226],
+            'San Rafael': [14.0718, 121.3383],
+            'San Roque': [14.0855, 121.3318],
+            'San Vicente': [14.0624, 121.3386],
+            'Santa Ana': [14.0693, 121.3142],
+            'Santa Catalina': [14.0587, 121.3420],
+            'Santa Cruz': [14.0479, 121.3132],
+            'Santa Elena': [14.0550, 121.3191],
+            'Santa Filomena': [14.0442, 121.3336],
+            'Santa Isabel': [14.0388, 121.3184],
+            'Santa Maria': [14.0845, 121.3442],
+            'Santa Maria Magdalena': [14.0836, 121.3187],
+            'Santa Monica': [14.0567, 121.3412],
+            'Santa Veronica': [14.0492, 121.3414],
+            'Santiago I': [14.0762, 121.3483],
+            'Santiago II': [14.0751, 121.3499],
+            'Santisimo Rosario': [14.0707, 121.3374],
+            'Santo Angel': [14.0921, 121.3521],
+            'Santo Cristo': [14.0497, 121.3235],
+            'Santo Niño': [14.0719, 121.3347],
+            'Soledad': [14.0710, 121.3099]
+        };
+
+        // center of San Pablo City, Laguna
+        const initialLat = 14.065;
+        const initialLng = 121.325;
+        const initialZoom = 13;
+
+        const map = L.map('map').setView([initialLat, initialLng], initialZoom);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const markerGroup = L.featureGroup().addTo(map);
+
+        for (const barangay in barangayCoordinates) {
+            const [lat, lng] = barangayCoordinates[barangay];
+            
+            const marker = L.marker([lat, lng])
+                .bindPopup(`<b>${barangay}</b><br>Lat: ${lat}<br>Lng: ${lng}`);
+
+            markerGroup.addLayer(marker);
+        }
+
+        if (Object.keys(barangayCoordinates).length > 0) {
+             map.fitBounds(markerGroup.getBounds());
+        }
+
+    </script>
+
+</body>
+</html>
